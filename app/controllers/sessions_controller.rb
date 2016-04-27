@@ -14,6 +14,7 @@ class SessionsController < ApplicationController
       else
         render :new and return
       end
+      
     else
       render :new and return
     end
@@ -21,7 +22,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id]=nil
-    redirect_to "/home", notice: "Signed Out!"
+    redirect_to "/home"
   end
 
 end

@@ -5,3 +5,16 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+Placetype.destroy_all
+
+place_types = [
+  'Convenience store',
+  'Gym',
+  'Grocery or supermarket',
+  'School',
+  'Library',
+  'Museum']
+
+place_types.each do |type|
+  Placetype.create(category: type)
+end

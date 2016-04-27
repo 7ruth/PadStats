@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html>
+  <head profile="http://gmpg.org/xfn/11"><style type="text/css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc div{font-weight:400}</style>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+      html { height: 100% }
+      body { height: 100%; margin: 0; padding: 0 }
+      #map-canvas { height: 100% ;
+					position:relative;
+					z-index:1}
+
+#menu-bar {
+  width: 88%;
+  left:5%;
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 6px;
+  height: 3.5%;
+  line-height: 100%;
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  box-shadow: 0px 0px 0px #666666;
+  -webkit-box-shadow: 0px 0px 0px #666666;
+  -moz-box-shadow: 0px 0px 0px #666666;
+  background: rgba(99,99,99,0.8);
+  border: solid 1px #FFFFFF;
+  position:absolute;
+  z-index:5;
+}
+#menu-bar li {
+  margin: 0px 0px 6px 0px;
+  padding: 2px 0px 0px 4px;
+  float: left;
+  position: relative;
+  list-style: none;
+}
+#menu-bar a {
+  font-weight: bold;
+  font-family: arial;
+  font-style: normal;
+  font-size: 12px;
+  color: #FFFFFF;
+  text-decoration: none;
+  display: block;
+  padding: 4px 13px 4px 15px;
+  margin: 0;
+  margin-bottom: 6px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  text-shadow: 0px 0px 0px #FFFFFF;
+}
+#menu-bar li ul li a {
+  margin: 0;
+}
+#menu-bar .active a, #menu-bar li:hover > a {
+  background: #FF3D03;
+  color: #FFFFFF;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
+  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
+  text-shadow: 0px 0px 0px #FFFFFF;
+}
+#menu-bar ul li:hover a, #menu-bar li:hover li a {
+  background: none;
+  border: none;
+  color: #666;
+  -box-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+}
+#menu-bar ul a:hover {
+  background: #FF3D03 !important;
+  color: #FFFFFF !important;
+  border-radius: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  text-shadow: 0px 0px 0px #FFFFFF;
+}
+#menu-bar ul {
+  background: #DDDDDD;
+  background: linear-gradient(top,  #FFFFFF,  #CFCFCF);
+  background: -ms-linear-gradient(top,  #FFFFFF,  #CFCFCF);
+  background: -webkit-gradient(linear, left top, left bottom, from(#FFFFFF), to(#CFCFCF));
+  background: -moz-linear-gradient(top,  #FFFFFF,  #CFCFCF);
+  display: none;
+  margin: 0;
+  padding: 0;
+  width: 185px;
+  position: absolute;
+  top: 28px;
+  left: 0;
+  border: solid 1px #B4B4B4;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 0px #FFFFFF;
+  -moz-box-shadow: 0px 0px 0px #FFFFFF;
+  box-shadow: 0px 0px 0px #FFFFFF;
+}
+#menu-bar li:hover > ul {
+  display: block;
+}
+#menu-bar ul li {
+  float: none;
+  margin: 0;
+  padding: 0;
+}
+#menu-bar ul a {
+  padding:10px 0px 10px 15px;
+  color:#424242 !important;
+  font-size:12px;
+  font-style:normal;
+  font-family:arial;
+  font-weight: normal;
+  text-shadow: 2px 2px 3px #FFFFFF;
+}
+#menu-bar ul li:first-child > a {
+  border-top-left-radius: 10px;
+  -webkit-border-top-left-radius: 10px;
+  -moz-border-radius-topleft: 10px;
+  border-top-right-radius: 10px;
+  -webkit-border-top-right-radius: 10px;
+  -moz-border-radius-topright: 10px;
+}
+#menu-bar ul li:last-child > a {
+  border-bottom-left-radius: 10px;
+  -webkit-border-bottom-left-radius: 10px;
+  -moz-border-radius-bottomleft: 10px;
+  border-bottom-right-radius: 10px;
+  -webkit-border-bottom-right-radius: 10px;
+  -moz-border-radius-bottomright: 10px;
+}
+#menu-bar:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+#menu-bar {
+  display: inline-block;
+}
+  html[xmlns] #menu-bar {
+  display: block;
+}
+* html #menu-bar {
+  height: 1%;
+}
+
+#topbanner {
+	position:fixed;
+	bottom: 84%;
+	background: rgba(99,99,99,0.7);
+	width: 86%;
+	border:1px solid #FFFFFF;
+	border-radius:4px;
+	color:#FFFFFF;
+	font-size:34px;
+	z-index: 3;
+	left:5%;
+	margin: 0px 0px 0px 0px;
+	padding: 2px 15px 0px 24px;
+	font-weight: bold;
+	font-family: arial;
+	font-style: normal;
+}
+
+#topdescription {
+	position:fixed;
+	bottom: 79%;
+	background: rgba(99,99,99,0.7);
+	width: 86%;
+	border:1px solid #FFFFFF;
+	border-radius:4px;
+	color:#FFFFFF;
+	font-size:22px;
+	z-index: 2;
+	left:5%;
+	margin: 0px 0px 0px 0px;
+	padding: 2px 15px 0px 24px;
+	font-weight: bold;
+	font-family: arial;
+	font-style: normal;
+	}
+
+#getstarted {
+	position:fixed;
+	bottom: 74%;
+	background: rgba(99,99,99,0.85);
+	width: 11%;
+	border:3px solid #FF3D03;
+	border-radius:4px;
+	color:#FFFFFF;
+	font-size:22px;
+	z-index: 2;
+	left:5%;
+	margin: 0px 0px 0px 0px;
+	padding: 2px 15px 0px 24px;
+	font-weight: bold;
+	font-family: arial;
+	font-style: normal;
+	}
+
+#panel {
+	position:fixed;
+	bottom: 5%;
+	background: rgba(99,99,99,0.7);
+	width: 12%;
+	height: 86%;
+	border:1px solid #FFFFFF;
+	border-radius:4px;
+	color:#FFFFFF;
+	font-size:10px;
+	z-index: 6;
+	right:2%;
+	margin: 0px 0px 0px 0px;
+	padding: 2px 5px 0px 24px;
+	font-weight: bold;
+	font-family: arial;
+	font-style: normal;
+	}
+
+#modeoftravel {
+	position:fixed;
+	bottom: 10%;
+	background: rgba(99,99,99,0.7);
+	width: 80px;
+	height: 27px;
+	border:1px solid #FFFFFF;
+	border-radius:4px;
+	color:#FFFFFF;
+	font-size:16px;
+	z-index: 7;
+	right:16%;
+	margin: 0px 0px 0px 0px;
+	padding: 2px 15px 0px 24px;
+	font-weight: bold;
+	font-family: arial;
+	font-style: normal;
+}
+
+#measurementunits {
+	position:fixed;
+	bottom: 15%;
+	background: rgba(99,99,99,0.7);
+	width: 80px;
+	height: 27px;
+	border:1px solid #FFFFFF;
+	border-radius:4px;
+	color:#FFFFFF;
+	font-size:11px;
+	z-index: 7;
+	right:16%;
+	margin: 0px 0px 0px 0px;
+	padding: 2px 15px 0px 24px;
+	font-weight: bold;
+	font-family: arial;
+	font-style: normal;
+	}
+
+
+
+
+    </style>
+    <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzbS2nerrvbdvNlsyQO9cDWFNthdoswRU&sensor=false">
+    </script>
+
+
+
+	<div id="map_canvas">
+
+
+    <script type="text/javascript">
+
+
+
+	var directionsDisplay;
+	var directionsService = new google.maps.DirectionsService();
+	var map;
+	var arrLatLon = [];
+	var homeLatlng;
+    var destinationID;
+	var geocoder;
+
+	<!------------------------------------------------------->
+	//Polyline color
+	<!------------------------------------------------------->
+	function polylineOptionsActual() {
+	var polylineOptionsActual = new google.maps.Polyline({
+    strokeColor: '#FF3D03',
+    strokeOpacity: 1.0,
+    strokeWeight: 10
+    })};
+
+	<!------------------------------------------------------->
+	//Random color Gen
+	<!------------------------------------------------------->
+
+	function rainbow(numOfSteps, step) {
+    // This function generates vibrant, "evenly spaced" colours (i.e. no clustering). This is ideal for creating easily distinguishable vibrant markers in Google Maps and other apps.
+    // Adam Cole, 2011-Sept-14
+    // HSV to RBG adapted from: http://mjijackson.com/2008/02/rgb-to-hsl-and-rgb-to-hsv-color-model-conversion-algorithms-in-javascript
+    var r, g, b;
+    var h = step / numOfSteps;
+    var i = ~~(h * 6);
+    var f = h * 6 - i;
+    var q = 1 - f;
+    switch(i % 6){
+        case 0: r = 1, g = f, b = 0; break;
+        case 1: r = q, g = 1, b = 0; break;
+        case 2: r = 0, g = 1, b = f; break;
+        case 3: r = 0, g = q, b = 1; break;
+        case 4: r = f, g = 0, b = 1; break;
+        case 5: r = 1, g = 0, b = q; break;
+    }
+    var c = "#" + ("00" + (~ ~(r * 255)).toString(16)).slice(-2) + ("00" + (~ ~(g * 255)).toString(16)).slice(-2) + ("00" + (~ ~(b * 255)).toString(16)).slice(-2);
+    return (c);
+}
+
+
+
+	<!------------------------------------------------------->
+	//function greeting()
+	//	{
+	//	alert("Welcome " + document.forms["frame1"]["address1"].value + "!")
+	//	}
+	//new google.maps.LatLng(document.forms["frm1"]["fname"].value)
+    <!------------------------------------------------------->
+      function initialize() {
+		geocoder = new google.maps.Geocoder();
+	    homeLatlng = new google.maps.LatLng(45.434209,12.339083);
+
+       directionsDisplay = new google.maps.DirectionsRenderer({
+            draggable: true,
+            map: map,
+			polylineOptions: polylineOptionsActual,
+            markerOptions: {
+                draggable: true
+            },
+
+			panel: document.getElementById("directionsPanel"),
+            infoWindow: infowindow
+        });
+
+		var mapOptions = {
+          center: homeLatlng,
+          zoom: 18,
+          mapTypeId: google.maps.MapTypeId.SATELLITE,
+		  panControl: true,
+			  panControlOptions: {
+			  position: google.maps.ControlPosition.TOP_LEFT
+			},
+			zoomControl: true,
+			zoomControlOptions: {
+			  style: google.maps.ZoomControlStyle.LARGE,
+			  position: google.maps.ControlPosition.TOP_LEFT
+			}
+
+        };
+
+        map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+
+		directionsDisplay.setMap(map);
+
+
+
+		var infowindow = new google.maps.InfoWindow({
+        content: ''
+		})
+
+
+
+
+
+		}
+
+	<!------------------------------------------------------->
+	<!------------------------------------------------------->
+	function codeAddress() {
+	  var address = document.getElementById('address0').value;
+	  geocoder.geocode( { 'address': address}, function(results, status) {
+		if (status == google.maps.GeocoderStatus.OK) {
+		  map.setCenter(results[0].geometry.location);
+		  var marker = new google.maps.Marker({
+			  map: map,
+			  position: results[0].geometry.location
+		  });
+		} else {
+		  alert('Geocode was not successful for the following reason: ' + status);
+		}
+	  });
+	}
+
+	<!------------------------------------------------------->
+	<!------------------------------------------------------->
+
+
+	<!------------------------------------------------------->
+	//CALCULATE DISTANCE TRAVELLED
+	<!------------------------------------------------------->
+	var cumulativedistance=0;
+	function computeTotalDistance(result) {
+        var total = 0;
+        var myroute = result.routes[0];
+        for (i = 0; i < myroute.legs.length; i++) {
+            total += myroute.legs[i].distance.value;
+			cumulativedistance += myroute.legs[i].distance.value;
+        }
+
+		cumulativedistance = cumulativedistance / 1000;
+        total = total / 1000;
+
+		if (document.getElementById("total").innerHTML =="") {
+        document.getElementById("total").innerHTML = (Math.round((total* 0.6214)*100)/100) + " miles";}
+        else {
+		if (document.getElementById("total1").innerHTML == "") {document.getElementById("total1").innerHTML = (Math.round((total* 0.6214)*100)/100) + " miles";}
+		else {document.getElementById("total2").innerHTML = (Math.round((total* 0.6214)*100)/100) + " miles";}
+		};
+
+		document.getElementById("totaltotalz").innerHTML = (Math.round((cumulativedistance* 0.6214)*100)/100) + " miles";
+
+		}
+	<!------------------------------------------------------->
+	//CALCULATE TRAVEL TIME
+	<!------------------------------------------------------->
+	var cumulativetime=0;
+	function computetime(result) {
+		var time=0;
+		var mytravelroute=result.routes[0];
+		for (i = 0; i < mytravelroute.legs.length; i++) {
+            time += mytravelroute.legs[i].duration.value;
+			cumulativetime += mytravelroute.legs[i].duration.value;
+			}
+
+
+
+		var totalSec = time;
+		var hours = parseInt( totalSec / 3600 );
+		var minutes = parseInt( totalSec / 60 ) % 60;
+		var seconds = totalSec % 60;
+
+		var result = (hours < 10 ? "0" + hours : hours) + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds  < 10 ? "0" + seconds : seconds);
+
+		if (document.getElementById("time").innerHTML == "") {
+		document.getElementById("time").innerHTML = result;}
+		else {
+		if (document.getElementById("time1").innerHTML == "") {document.getElementById("time1").innerHTML = result;}
+		else {document.getElementById("time2").innerHTML = result;}
+
+
+
+		var totalSec1 = cumulativetime;
+		var hours1 = parseInt( totalSec1 / 3600 );
+		var minutes1 = parseInt( totalSec1 / 60 ) % 60;
+		var seconds1 = totalSec1 % 60;
+
+		var result1 = (hours1 < 10 ? "0" + hours1 : hours1) + ":" + (minutes1 < 10 ? "0" + minutes1 : minutes1) + ":" + (seconds1  < 10 ? "0" + seconds1 : seconds1);
+
+		document.getElementById("timez").innerHTML = result1;
+
+		};
+		}
+
+
+	<!------------------------------------------------------->
+	//New Direction Renderer
+	<!------------------------------------------------------->
+	function renderDirections(response) {
+      var directionsRenderer = new google.maps.DirectionsRenderer({
+            draggable: true,
+            map: map,
+			polylineOptions: new google.maps.Polyline({strokeColor: rainbow(Math.round(Math.random() * 100),Math.round(Math.random() * 9)),
+            })});
+      directionsRenderer.setMap(map);
+      directionsRenderer.setDirections(response);
+	  computetime(directionsRenderer.directions);
+	  computeTotalDistance(directionsRenderer.directions);
+    }
+	<!------------------------------------------------------->
+	//Calc Route 1  (Once ready, make an array loop to "roll up" all the functionallity)
+	<!------------------------------------------------------->
+		function calcRoute1() {
+		  var start = document.getElementById('address0').value;
+		  var end = document.getElementById('address1').value;
+		  var request = {
+			  origin:start,
+			  destination:end,
+			  travelMode: google.maps.DirectionsTravelMode.DRIVING
+		  };
+
+		  directionsService.route(request, function(response, status) {
+			if (status == google.maps.DirectionsStatus.OK) {
+			  renderDirections(response);
+			}
+		  });
+
+
+		}
+	<!------------------------------------------------------->
+	//Calc Route 2
+	<!------------------------------------------------------->
+		function calcRoute2() {
+			  var start = document.getElementById('address0').value;
+			  var end = document.getElementById('address2').value;
+			  var request = {
+				  origin:start,
+				  destination:end,
+				  travelMode: google.maps.DirectionsTravelMode.DRIVING
+			  };
+			  directionsService.route(request, function(response, status) {
+				if (status == google.maps.DirectionsStatus.OK) {
+				  renderDirections(response);
+				}
+			  });
+			}
+	<!------------------------------------------------------->
+	//Calc Route 3
+	<!------------------------------------------------------->
+		function calcRoute3() {
+			  var start = document.getElementById('address0').value;
+			  var end = document.getElementById('address3').value;
+			  var request = {
+				  origin:start,
+				  destination:end,
+				  travelMode: google.maps.DirectionsTravelMode.DRIVING
+			  };
+			  directionsService.route(request, function(response, status) {
+				if (status == google.maps.DirectionsStatus.OK) {
+				   renderDirections(response);
+				}
+			  });
+			}
+	<!------------------------------------------------------->
+	//	var myTitle = document.createElement('h1');
+	//	myTitle.style.color = 'red';
+	//	myTitle.innerHTML = 'menu would go here';
+	//	var myTextDiv = document.createElement('div');
+	//	myTextDiv.appendChild(myTitle);
+
+	//	map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(myTextDiv);
+
+	//	var marker = new google.maps.Marker({
+	//		position: new google.maps.LatLng(33.6803003, -116.173894),
+	//		title: "Festival" });
+
+	//		marker.setMap(map);}
+	<!------------------------------------------------------->
+
+      google.maps.event.addDomListener(window, 'load', initialize);
+
+
+
+    </script>
+	<script>
+	$(document).ready(function(){
+  $("#getstarted").click(function(){
+    $("#topbanner").hide();
+	$("#topdescription").hide();
+	$("#panel").slideToggle(800);
+	$("#getstarted").hide();
+  });
+  $("#home").click(function(){
+    $("#topbanner").show();
+	$("#topdescription").show();
+	$("#getstarted").show();
+	$("#panel").hide();
+  });
+  $("#traveltimes").click(function(){
+    $("#topbanner").hide();
+	$("#topdescription").hide();
+	$("#panel").slideToggle(800);
+	$("#getstarted").hide();
+  });
+
+});
+</script>
+
+  </div>
+
+  </head>
+  <!---------------------------------------------------------------------------------------------->
+  <body>
+  <!-------------------------------------------------------
+  Top Menu Bar - need an if statement to show difference menu options if logged in vs not logged in
+  <!-------------------------------------------------------->
+	<div class="container topcont hasStaticHeader">
+			<ul id="menu-bar">
+	 <li id="home" class="active"><a href="#">ADDRSS</a></li>
+	 <li><a href="#">Utilities</a>
+	  <ul>
+	   <li><a id="traveltimes" href="#">Travel Times</a></li>
+	   <li><a href="#">POI Sonar</a></li>
+	   <li><a href="#">Zip Trends</a></li>
+	  </ul>
+	 </li>
+	 <li><a href="#">About</a></li>
+	 <li><a href="#">Login</a></li>
+	 </ul>
+		</div>
+	<!------------------------------------------------------->
+	<!------------------------------------------------------->
+	 <div id="panel" style="color:#ffffff; font-size:18px; display:none"" >
+
+	<form name="frame1" onsubmit="codeAddress();return false;">
+    <b>Start: </b>
+		<input type="text" id="address0" >
+		<input type="submit" style="visibility: hidden;">
+	</form>
+
+	<form name="frame2" onsubmit="calcRoute1();return false;">
+	<b>First Address: </b>
+	    <input type="text" id="address1" >
+		<input type="submit" style="visibility: hidden;">
+	</form>
+
+	<div id="1totals" style="font-size:50%">
+	 <p>Distance: <span id="total"></span></p>
+	 <p>Travel Time: <span id="time"></span></p>
+	</div>
+
+	<form name="frame3" onsubmit="calcRoute2();return false;">
+	<b>Second Address: </b>
+		<input type="text" id="address2">
+	<input type="submit" style="visibility: hidden;">
+	</form>
+
+	<div id="2totals" style="font-size:50%">
+	 <p>Distance: <span id="total1"></span></p>
+	 <p>Travel Time: <span id="time1"></span></p>
+	</div>
+
+	<form name="frame4" onsubmit="calcRoute3();return false;">
+	<b>Third Address: </b>
+		<input type="text" id="address3">
+		<input type="submit" style="visibility: hidden;">
+	</form>
+
+	<div id="3totals" style="font-size:50%">
+	 <p>Distance: <span id="total2"></span></p>
+	 <p>Travel Time: <span id="time2"></span></p>
+	</div>
+
+	<div id="totaltotals" style="font-size:50%">
+	<p>Total Distance: <span id="totaltotalz"></span></p>
+	<p>Total Travel Time: <span id="timez"></span></p>
+	</div>
+
+	</div>
+	<!------------------------------------------------------->
+	<!------------------------------------------------------->
+	<div id="topbanner">
+	<b> ADDRSS <br style="font-size:18px">
+		Find the right one <br>
+	</b>
+	</div>
+	<!------------------------------------------------------->
+	<!------------------------------------------------------->
+
+	<div id="getstarted">
+	<b>
+	Lets get started!
+	</b>
+	</div>
+
+	<!------------------------------------------------------->
+	<!-------------------------------------------------------
+	<div id="directionsPanel" >
+
+	 <p>Total Distance: <span id="total"></span></p>
+	 <p>Total Travel Time: <span id="time"></span></p>
+
+	</div>
+	<!------------------------------------------------------->
+	<!-------------------------------------------------------
+	<div id="modeoftravel">
+          <select id="mode" onchange="calcRoute()">
+          <option value="DRIVING" selected="selected">Driving</option>
+          <option value="WALKING">Walking</option>
+        </select>
+    </div>
+	<!------------------------------------------------------->
+	<!-------------------------------------------------------
+	<div id="measurementunits" >
+          <select id="units" onchange="calcRoute()">
+          <option value="IMPERIAL" selected="selected">Miles</option>
+          <option value="METRIC ">Kilometres</option>
+        </select>
+    </div>
+	<!------------------------------------------------------->
+	<!------------------------------------------------------->
+		<div id="map-canvas"/>
+	<!------------------------------------------------------->
+	<!------------------------------------------------------->
+
+  </body>
+</html>

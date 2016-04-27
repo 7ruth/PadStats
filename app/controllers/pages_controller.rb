@@ -10,6 +10,9 @@ class PagesController < ApplicationController
     gon.address = session[:address]
     session[:address] = "null"
     @location = Location.new
+
+
   end
+
 
 end

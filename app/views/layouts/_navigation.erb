@@ -9,13 +9,13 @@
       </button>
         <% if current_user %>
           <h1 style="float:left; font-size:1vw;">Logged in as <%= current_user.email %> </h1>
-          <%= link_to 'Sign Out', signout_path, class: 'navbar-brand' %>
+          <%= link_to 'Sign Out', signout_path, class: 'navbar-brand', 'data-no-turbolink' => true %>
           <%= link_to 'My History', user_path(current_user.id), class: 'navbar-brand' %>
         <% else %>
           <%= link_to 'Sign Up', signup_path, class: 'navbar-brand' %>
           <%= link_to 'Sign In', signin_path, class: 'navbar-brand' %>
         <% end %>
-        <%= link_to 'Home', "/", class: 'navbar-brand', id: 'home-link' %>
+        <%= link_to 'Home', "/home", class: 'navbar-brand', id: 'home-link', 'data-no-turbolink' => true %>
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">

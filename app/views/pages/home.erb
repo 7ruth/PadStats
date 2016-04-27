@@ -6,23 +6,24 @@
 	<div id="map-canvas"></div>
 
   <div id="geocoding_fields">
-    <%= text_field_tag :location, params[:address], placeholder: "Enter a place", :id => 'search_box_geocoding', class: 'search_box' %>
-    <%= button_tag "Search", id: "submit_button_geocoding", data: { disable_with: "Please wait..." }, class: "submit_button" %>
+
+    <%= form_for([@user, @user.locations.build]) do |f| %>
+        <%= f.text_field :address, :placeholder => "Enter a location!", class: 'search_box' %>
+
+
   </div>
 </div>
 
+<div class="field">
+
+  <%= collection_check_boxes :user, :placetype_ids, Placetype.all, :id, :category do |b| %>
+    <div class="collection-check-box">
+      <%= b.check_box %>
+      <%= b.label %>
+    </div>
+  <% end %>
+</div>
 
 <%= "User ID is :#{@user.id}" %>
-
-<%= form_for([@user, @user.locations.build]) do |f| %>
-
-  <p>
-    <%= f.label :address %><br>
-    <%= f.text_field :address %>
-  </p>
-
-  <p>
-    <%= f.submit %>
-  </p>
 
 <% end %>
