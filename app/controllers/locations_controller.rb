@@ -24,7 +24,7 @@ class LocationsController < ApplicationController
   end
 
   def updated
-    
+
   end
 
 private

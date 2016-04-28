@@ -19,5 +19,3 @@ place_types = [
 place_types.each_with_index do |type, index|
   Placetype.create(category: type, jsindex: index)
 end
-
-User.create(email:"guest")

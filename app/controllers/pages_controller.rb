@@ -2,7 +2,7 @@ class PagesController < ApplicationController
 
   def home
     if current_user.blank?
-      @user = User.find_by(email: "guest")
+      @user = User.find(1)
     else
       @user = current_user
     end
