@@ -6,6 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 Placetype.destroy_all
+User.destroy_all
 
 place_types = [
   'Convenience store',
@@ -18,3 +19,5 @@ place_types = [
 place_types.each_with_index do |type, index|
   Placetype.create(category: type, jsindex: index)
 end
+
+User.create(email:"guest")
