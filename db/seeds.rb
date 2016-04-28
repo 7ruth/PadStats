@@ -10,11 +10,11 @@ Placetype.destroy_all
 place_types = [
   'Convenience store',
   'Gym',
-  'Grocery or supermarket',
+  'Supermarket',
   'School',
   'Library',
   'Museum']
 
-place_types.each do |type|
-  Placetype.create(category: type)
+place_types.each_with_index do |type, index|
+  Placetype.create(category: type, jsindex: index)
 end

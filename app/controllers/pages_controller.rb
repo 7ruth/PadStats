@@ -8,9 +8,9 @@ class PagesController < ApplicationController
     end
 
     gon.address = session[:address]
-    session[:address] = "null"
-    @location = Location.new
+    gon.jsindex = session[:jsindex]
 
+    @location = Location.new
 
   end
 

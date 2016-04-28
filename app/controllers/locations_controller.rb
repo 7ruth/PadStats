@@ -1,5 +1,10 @@
 class LocationsController < ApplicationController
 
+  def clear
+    session[:address] = "null"
+    redirect_to "/home"
+  end
+
   def create
     if current_user.blank?
       @user = User.find(1)
@@ -11,6 +16,15 @@ class LocationsController < ApplicationController
 
     session[:address] = @location.address
     redirect_to "/home"
+  end
+
+  def set_place_types
+    session[:jsindex] = params[:user][:placetype_ids]
+    redirect_to "/home"
+  end
+
+  def updated
+    
   end
 
 private

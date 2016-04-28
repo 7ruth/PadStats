@@ -2,28 +2,32 @@
 
 <div id="search_options">
 
-<div id="map-container">
-	<div id="map-canvas"></div>
+  <div id="map-container">
+	  <div id="map-canvas"></div>
 
-  <div id="geocoding_fields">
+    <div id="geocoding_fields">
 
-    <%= form_for([@user, @user.locations.build]) do |f| %>
+      <%= form_for([@user, @user.locations.build]) do |f| %>
         <%= f.text_field :address, :placeholder => "Enter a location!", class: 'search_box' %>
+      <% end %>
 
 
-  </div>
-</div>
 
-<div class="field">
-
-  <%= collection_check_boxes :user, :placetype_ids, Placetype.all, :id, :category do |b| %>
-    <div class="collection-check-box">
-      <%= b.check_box %>
-      <%= b.label %>
     </div>
-  <% end %>
-</div>
-
-<%= "User ID is :#{@user.id}" %>
-
+  </div>
+<% if current_user %>
+  <div class="field">
+    <%= form_tag ("/set_place_types") do %>
+      <%= collection_check_boxes :user, :placetype_ids, Placetype.all, :jsindex, :category do |b| %>
+        <div class="collection-check-box">
+          <%= b.check_box %>
+          <%= b.label %>
+        </div>
+      <% end %>
+      <%= submit_tag "Set Categories", class: "input_button" %>
+    <% end %>
 <% end %>
+  </div>
+
+
+</div>

@@ -14,13 +14,14 @@ class SessionsController < ApplicationController
       else
         render :new and return
       end
-      
+
     else
       render :new and return
     end
   end
 
   def destroy
+    session[:address] = "null"
     session[:user_id]=nil
     redirect_to "/home"
   end
