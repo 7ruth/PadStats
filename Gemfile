@@ -46,6 +46,7 @@ gem 'bootstrap-sass', '~> 3.0.3.0'
 
 # production gems for heroku
 group :production do
+  # pg is already listed above, in addition to the produciton group gems heroku will build with all the gems not in a specfic group
   gem 'pg', '~> 0.15'
   gem 'rails_12factor'
 end

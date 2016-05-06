@@ -100,6 +100,7 @@ function codeAddress(geocoding){
 
     address = gon.address;
     if(address.length > 0){
+      // callback in line below is should be broken out
       geocoding.geocode({'address': address},function(results, status){
         if(status == google.maps.GeocoderStatus.OK){
           map.setCenter(results[0].geometry.location);
@@ -134,7 +135,7 @@ for (var i=0; i<gon.jsindex.length-1; i++) {
                   alert("Search field can't be blank");
                 }
               }
-            }
+            } // end of codeAddress function, indication of really poor indentation above
 
 
 
