@@ -13,6 +13,7 @@ class LocationsController < ApplicationController
     end
 
     @location = @user.locations.create(location_params)
+    # it might be nice to have some error handling tying into validations
 
     session[:address] = @location.address
     redirect_to "/home"
@@ -23,6 +24,7 @@ class LocationsController < ApplicationController
     redirect_to "/home"
   end
 
+  # typo, should be update. Also there is action is not being used and could be removed
   def updated
 
   end

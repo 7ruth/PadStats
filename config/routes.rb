@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   post "/set_place_types" => "locations#set_place_types"
 
   resources :users do
+    # it's a best practice to limit routes to only those that have controller actions with shallow nesting. eg.
+    # resources :locations only: [:create]
     resources :locations
   end
 
